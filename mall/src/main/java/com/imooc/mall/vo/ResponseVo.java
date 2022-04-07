@@ -1,5 +1,8 @@
 package com.imooc.mall.vo;
 
+import lombok.Data;
+
+@Data
 public class ResponseVo<T> {
     public ResponseVo(Integer status, String msg) {
         this.status = status;
