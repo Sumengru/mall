@@ -1,6 +1,7 @@
 package com.imooc.mall.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.imooc.mall.enums.ResponseEnums;
 import lombok.Data;
 
 @Data
@@ -13,7 +14,11 @@ public class ResponseVo<T> {
     private Integer status;
     private String msg;
     private T data;
-    public static <T>ResponseVo<T> success(String msg){
-        return new ResponseVo<>(0,msg);
+    public static <T>ResponseVo<T> success(){
+        return new ResponseVo<>(ResponseEnums.SUCCESS.getCode(),ResponseEnums.SUCCESS.getDesc());
+    }
+
+    public static <T>ResponseVo<T> error(ResponseEnums responseEnums){
+        return new ResponseVo<>(responseEnums.getCode(),responseEnums.getDesc());
     }
 }
