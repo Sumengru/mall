@@ -26,4 +26,8 @@ public class ResponseVo<T> {
     public static <T>ResponseVo<T> error(ResponseEnums responseEnums, BindingResult bindingResult){
         return new ResponseVo<>(responseEnums.getCode(),bindingResult.getFieldError().getField() + " "+ bindingResult.getFieldError().getDefaultMessage());
     }
+
+    public static <T>ResponseVo<T> error(ResponseEnums responseEnums, String msg){
+        return new ResponseVo<>(responseEnums.getCode(),msg);
+    }
 }

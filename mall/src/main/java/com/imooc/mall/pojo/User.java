@@ -24,6 +24,9 @@ public class User {
 
     private String question;
 
+    public User() {
+    }
+
     private String answer;
 
     private Integer role;

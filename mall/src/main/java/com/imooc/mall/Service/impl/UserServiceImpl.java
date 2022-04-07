@@ -2,7 +2,10 @@ package com.imooc.mall.Service.impl;
 
 import com.imooc.mall.Service.IUserService;
 import com.imooc.mall.dao.UserMapper;
+import com.imooc.mall.enums.ResponseEnums;
+import com.imooc.mall.enums.RoleEnums;
 import com.imooc.mall.pojo.User;
+import com.imooc.mall.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -14,20 +17,22 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
     @Override
-    public void register(User user) {
+    public ResponseVo register(User user) {
+        user.setRole(RoleEnums.CUNSTOM.getCode());
         int countByUsername = userMapper.CountByUsername(user.getUsername());
         if(countByUsername > 0){
-            throw new RuntimeException("该用户已经注册！");
+            return ResponseVo.error(ResponseEnums.USER_EXIST);
         }
         int countByEmail = userMapper.CountByEmail(user.getEmail());
         if(countByEmail > 0){
-            throw new RuntimeException("该邮箱已经注册！");
+            return ResponseVo.error(ResponseEnums.EMAIL_EXIST);
         }
         user.setPassword(DigestUtils.md5DigestAsHex(user.getUsername().getBytes(StandardCharsets.UTF_8)));
         int resultCount = userMapper.insertSelective(user);
         if(resultCount == 0){
-            throw new RuntimeException("注册失败");
+            return ResponseVo.error(ResponseEnums.ERROR);
         }
+        return ResponseVo.success();
     }
 
     @Override

@@ -12,6 +12,8 @@ public enum ResponseEnums {
 
     USER_EXIST(1,"用户已存在"),
 
+    EMAIL_EXIST(2,"邮箱已存在"),
+
     NEED_LOGIN(10,"未登录"),
 
     PARAM_ERROR(3,"参数错误");
