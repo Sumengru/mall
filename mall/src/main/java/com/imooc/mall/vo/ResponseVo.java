@@ -1,8 +1,10 @@
 package com.imooc.mall.vo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 @Data
+@JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 public class ResponseVo<T> {
     public ResponseVo(Integer status, String msg) {
         this.status = status;
