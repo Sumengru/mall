@@ -12,7 +12,9 @@ public enum ResponseEnums {
 
     USER_EXIST(1,"用户已存在"),
 
-    NEED_LOGIN(10,"未登录");
+    NEED_LOGIN(10,"未登录"),
+
+    PARAM_ERROR(3,"参数错误");
 
     ResponseEnums(Integer code, String desc) {
         this.code = code;

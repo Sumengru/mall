@@ -3,6 +3,7 @@ package com.imooc.mall.vo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.imooc.mall.enums.ResponseEnums;
 import lombok.Data;
+import org.springframework.validation.BindingResult;
 
 @Data
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
@@ -20,5 +21,9 @@ public class ResponseVo<T> {
 
     public static <T>ResponseVo<T> error(ResponseEnums responseEnums){
         return new ResponseVo<>(responseEnums.getCode(),responseEnums.getDesc());
+    }
+
+    public static <T>ResponseVo<T> error(ResponseEnums responseEnums, BindingResult bindingResult){
+        return new ResponseVo<>(responseEnums.getCode(),bindingResult.getFieldError().getField() + " "+ bindingResult.getFieldError().getDefaultMessage());
     }
 }
