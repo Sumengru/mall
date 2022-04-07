@@ -13,10 +13,20 @@ public class ResponseVo<T> {
         this.msg = msg;
     }
     private Integer status;
+
+    public ResponseVo(Integer status, T data) {
+        this.status = status;
+        this.data = data;
+    }
+
     private String msg;
     private T data;
-    public static <T>ResponseVo<T> success(){
+    public static <T>ResponseVo<T> successByMsg(){
         return new ResponseVo<>(ResponseEnums.SUCCESS.getCode(),ResponseEnums.SUCCESS.getDesc());
+    }
+
+    public static <T>ResponseVo<T> success(T data){
+        return new ResponseVo<>(ResponseEnums.SUCCESS.getCode(),data);
     }
 
     public static <T>ResponseVo<T> error(ResponseEnums responseEnums){

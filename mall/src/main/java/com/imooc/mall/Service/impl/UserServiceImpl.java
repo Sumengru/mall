@@ -17,7 +17,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
     @Override
-    public ResponseVo register(User user) {
+    public ResponseVo<User> register(User user) {
         user.setRole(RoleEnums.CUNSTOM.getCode());
         int countByUsername = userMapper.CountByUsername(user.getUsername());
         if(countByUsername > 0){
@@ -32,11 +32,19 @@ public class UserServiceImpl implements IUserService {
         if(resultCount == 0){
             return ResponseVo.error(ResponseEnums.ERROR);
         }
-        return ResponseVo.success();
+        return ResponseVo.success(user);
     }
 
     @Override
-    public void login(User user) {
-
+    public ResponseVo<User> login(String username, String password) {
+        User user = userMapper.selectByUserName(username);
+        if(user == null){
+            return ResponseVo.error(ResponseEnums.USER_OR_PASSWORD_ERROR);
+        }
+        if(!user.getPassword().
+                equalsIgnoreCase(DigestUtils.md5DigestAsHex(user.getUsername().getBytes(StandardCharsets.UTF_8)))){
+            return ResponseVo.error(ResponseEnums.USER_OR_PASSWORD_ERROR);
+        }
+        return ResponseVo.success(user);
     }
 }

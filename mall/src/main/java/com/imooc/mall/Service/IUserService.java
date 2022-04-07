@@ -4,7 +4,7 @@ import com.imooc.mall.pojo.User;
 import com.imooc.mall.vo.ResponseVo;
 
 public interface IUserService {
-    ResponseVo register(User user);
+    ResponseVo<User> register(User user);
 
-    void login(User user);
+    ResponseVo<User> login(String username,String password);
 }

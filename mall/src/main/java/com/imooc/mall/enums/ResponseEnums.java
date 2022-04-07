@@ -16,6 +16,8 @@ public enum ResponseEnums {
 
     NEED_LOGIN(10,"未登录"),
 
+    USER_OR_PASSWORD_ERROR(11,"用户名或密码错误"),
+
     PARAM_ERROR(3,"参数错误");
 
     ResponseEnums(Integer code, String desc) {
