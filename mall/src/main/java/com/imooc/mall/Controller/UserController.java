@@ -59,4 +59,14 @@ public class UserController {
     void error(){
         throw new RuntimeException("发生错误！");
     }
+
+    @PostMapping("loginout")
+    public ResponseVo<User> loginOut(HttpSession session){
+        User user = (User) session.getAttribute(CURRENT_USER);
+        if(user == null){
+            return ResponseVo.error(NEED_LOGIN);
+        }
+        session.removeAttribute(CURRENT_USER);
+        return ResponseVo.successByMsg();
+    }
 }

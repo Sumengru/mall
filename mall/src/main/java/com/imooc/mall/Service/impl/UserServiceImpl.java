@@ -45,6 +45,7 @@ public class UserServiceImpl implements IUserService {
                 equalsIgnoreCase(DigestUtils.md5DigestAsHex(user.getUsername().getBytes(StandardCharsets.UTF_8)))){
             return ResponseVo.error(ResponseEnums.USER_OR_PASSWORD_ERROR);
         }
+        user.setPassword("");
         return ResponseVo.success(user);
     }
 }
