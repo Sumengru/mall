@@ -30,7 +30,6 @@ public class UserController {
             log.error(bindingResult.getFieldError().getDefaultMessage());
             return ResponseVo.error(PARAM_ERROR,bindingResult);
         }
-        //return ResponseVo.success();
         User user = new User();
         BeanUtils.copyProperties(userForm,user);
         return userService.register(user);
@@ -51,9 +50,6 @@ public class UserController {
     @GetMapping("msg")
     public ResponseVo<User> getUserMsg(HttpSession session){
         User user = (User) session.getAttribute(CURRENT_USER);
-        if(user == null){
-            return ResponseVo.error(NEED_LOGIN);
-        }
         return ResponseVo.success(user);
     }
     void error(){
@@ -62,10 +58,6 @@ public class UserController {
 
     @PostMapping("loginout")
     public ResponseVo<User> loginOut(HttpSession session){
-        User user = (User) session.getAttribute(CURRENT_USER);
-        if(user == null){
-            return ResponseVo.error(NEED_LOGIN);
-        }
         session.removeAttribute(CURRENT_USER);
         return ResponseVo.successByMsg();
     }

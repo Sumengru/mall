@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import static com.imooc.mall.enums.ResponseEnums.ERROR;
+import static com.imooc.mall.enums.ResponseEnums.NEED_LOGIN;
 
 @ControllerAdvice
 public class RunTimeExceptionHandler {
@@ -17,5 +18,11 @@ public class RunTimeExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseVo handler(RuntimeException e){
         return ResponseVo.error(ERROR,e.getMessage());
+    }
+
+    @ExceptionHandler(UserLoginException.class)
+    @ResponseBody
+    public ResponseVo userLoginHandler(){
+        return ResponseVo.error(NEED_LOGIN);
     }
 }
