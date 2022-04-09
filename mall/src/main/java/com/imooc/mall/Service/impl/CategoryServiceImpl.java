@@ -35,9 +35,23 @@ public class CategoryServiceImpl implements ICategoryService {
         List<CategoryVo> categoryVos = categories.stream().filter(k -> k.getParentId().equals(ROOT_PARENT_ID))
                 .map(this::category2CategoryVO)
                 .collect(Collectors.toList());
+        findSubCategory(categoryVos,categories);
         return ResponseVo.success(categoryVos);
     }
 
+    public void findSubCategory(List<CategoryVo> categoryVoList,List<Category> categoryList){
+        for(CategoryVo categoryVo : categoryVoList){
+            List<CategoryVo> subCategoryList = new ArrayList<>();
+            for(Category category : categoryList){
+                if(categoryVo.getId().equals(category.getParentId())){
+                    CategoryVo subCategory = category2CategoryVO(category);
+                    subCategoryList.add(subCategory);
+                }
+            }
+            categoryVo.setSubCategories(subCategoryList);
+        }
+
+    }
     public CategoryVo category2CategoryVO(Category category){
         CategoryVo categoryVo = new CategoryVo();
         BeanUtils.copyProperties(category,categoryVo);
