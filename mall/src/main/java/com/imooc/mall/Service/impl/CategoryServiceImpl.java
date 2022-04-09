@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
         List<CategoryVo> categoryVos = categories.stream().filter(k -> k.getParentId().equals(ROOT_PARENT_ID))
                 .map(this::category2CategoryVO)
+                .sorted(Comparator.comparing(CategoryVo::getSortOrder).reversed())
                 .collect(Collectors.toList());
         findSubCategory(categoryVos,categories);
         return ResponseVo.success(categoryVos);
@@ -48,7 +50,9 @@ public class CategoryServiceImpl implements ICategoryService {
                     subCategoryList.add(subCategory);
                 }
             }
+            subCategoryList.sort(Comparator.comparing(CategoryVo::getSortOrder).reversed());
             categoryVo.setSubCategories(subCategoryList);
+            findSubCategory(subCategoryList,categoryList);
         }
 
     }

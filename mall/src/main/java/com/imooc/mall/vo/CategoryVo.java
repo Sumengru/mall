@@ -13,5 +13,7 @@ public class CategoryVo {
 
     private Boolean status;
 
+    private Integer sortOrder;
+
     private List<CategoryVo> subCategories;
 }
