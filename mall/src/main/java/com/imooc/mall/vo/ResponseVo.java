@@ -12,13 +12,11 @@ public class ResponseVo<T> {
         this.status = status;
         this.msg = msg;
     }
-    private Integer status;
-
     public ResponseVo(Integer status, T data) {
         this.status = status;
         this.data = data;
     }
-
+    private Integer status;
     private String msg;
     private T data;
     public static <T>ResponseVo<T> successByMsg(){

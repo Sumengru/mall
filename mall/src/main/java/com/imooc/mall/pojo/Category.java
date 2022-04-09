@@ -4,14 +4,14 @@ import lombok.Data;
 
 import java.util.Date;
 @Data
-public class Catogory {
+public class Category {
     private Integer id;
 
     private Integer parentId;
 
     private String name;
 
-    private Integer status;
+    private Boolean status;
 
     private Integer sortOrder;
 
