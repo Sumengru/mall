@@ -7,7 +7,7 @@ public class Cart {
 
     public Cart(Integer productId, Integer productStock, Boolean productSeleted) {
         this.productId = productId;
-        this.productStock = productStock;
+        this.quantity = productStock;
         this.productSeleted = productSeleted;
     }
 
@@ -16,7 +16,7 @@ public class Cart {
 
     private Integer productId;
 
-    private Integer productStock;
+    private Integer quantity;
 
     private Boolean productSeleted;
 
