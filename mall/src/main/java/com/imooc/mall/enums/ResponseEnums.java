@@ -16,6 +16,8 @@ public enum ResponseEnums {
 
     NEED_LOGIN(10,"未登录"),
 
+    PREDUCT_OFF_SALE_OR_DELETE(12,"商品下架或删除"),
+
     USER_OR_PASSWORD_ERROR(11,"用户名或密码错误"),
 
     PARAM_ERROR(3,"参数错误");
