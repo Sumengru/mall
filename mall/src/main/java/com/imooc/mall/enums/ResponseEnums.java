@@ -20,6 +20,10 @@ public enum ResponseEnums {
 
     USER_OR_PASSWORD_ERROR(11,"用户名或密码错误"),
 
+    PRODUCT_NOT_EXIST(13,"商品不存在"),
+
+    PRODUCT_STOCK_ERROR(14,"商品库存不足"),
+
     PARAM_ERROR(3,"参数错误");
 
     ResponseEnums(Integer code, String desc) {
