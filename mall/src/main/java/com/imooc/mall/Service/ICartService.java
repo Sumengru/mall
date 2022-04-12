@@ -7,4 +7,5 @@ import com.imooc.mall.vo.ResponseVo;
 
 public interface ICartService {
     public ResponseVo<CartVo> add(Integer uid, CartAddForm cartAddForm);
+    public ResponseVo<CartVo> list(Integer uid);
 }

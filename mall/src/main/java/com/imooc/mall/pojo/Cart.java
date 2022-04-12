@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class Cart {
 
-    public Cart(Integer productId, Integer productStock, Boolean productSeleted) {
+    public Cart(Integer productId, Integer quantity, Boolean productSeleted) {
         this.productId = productId;
-        this.quantity = productStock;
+        this.quantity = quantity;
         this.productSeleted = productSeleted;
     }
 

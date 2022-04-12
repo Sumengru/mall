@@ -19,9 +19,22 @@ public class CartProductVO {
 
     private Integer productStatus;
 
-    private Integer productTotalPrice;
+    private BigDecimal productTotalPrice;
 
     private Integer productStock;
 
     private Boolean productSeleted;
+
+    public CartProductVO(Integer productId, Integer quantity, String productName, String productSubtitle, String productMainImage, BigDecimal productPrice, Integer productStatus, BigDecimal productTotalPrice, Boolean productSeleted) {
+        this.productId = productId;
+        this.quantity = quantity;
+        this.productName = productName;
+        this.productSubtitle = productSubtitle;
+        this.productMainImage = productMainImage;
+        this.productPrice = productPrice;
+        this.productStatus = productStatus;
+        this.productTotalPrice = productTotalPrice;
+        this.productStock = productStock;
+        this.productSeleted = productSeleted;
+    }
 }
