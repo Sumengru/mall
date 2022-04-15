@@ -6,7 +6,7 @@ import lombok.Data;
 import org.springframework.validation.BindingResult;
 
 @Data
-@JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseVo<T> {
     public ResponseVo(Integer status, String msg) {
         this.status = status;
