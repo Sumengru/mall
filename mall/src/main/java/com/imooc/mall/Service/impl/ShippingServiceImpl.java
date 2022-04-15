@@ -1,5 +1,6 @@
 package com.imooc.mall.Service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.imooc.mall.Service.IShippingService;
 import com.imooc.mall.dao.ShippingMapper;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -28,22 +30,37 @@ public class ShippingServiceImpl implements IShippingService {
             return ResponseVo.error(ResponseEnums.ERROR);
         }
         Map<String,Integer> map = new HashMap<>();
-        map.put("shippingId",raw);
+        map.put("shippingId",shipping.getId());
         return ResponseVo.success(map);
     }
 
     @Override
     public ResponseVo delete(Integer uid, Integer shipingId) {
-        return null;
+        int raw = shippingMapper.deleteByUidAndShippingId(uid, shipingId);
+        if(raw == 0){
+            return ResponseVo.error(ResponseEnums.DELETE_SHIPPING_ERROR);
+        }
+        return ResponseVo.success(ResponseVo.successByMsg());
     }
 
     @Override
     public ResponseVo update(Integer uid, Integer shippingId, ShippingForm form) {
-        return null;
+        Shipping shipping = new Shipping();
+        BeanUtils.copyProperties(form,shipping);
+        shipping.setId(shippingId);
+        shipping.setUserId(uid);
+        int raw = shippingMapper.updateByPrimaryKeySelective(shipping);
+        if(raw == 0){
+            return ResponseVo.error(ResponseEnums.ERROR);
+        }
+        return ResponseVo.successByMsg();
     }
 
     @Override
     public ResponseVo<PageInfo> list(Integer pageNum, Integer pageSize, Integer uid) {
-        return null;
+        PageHelper.startPage(pageNum,pageSize);
+        List<Shipping> shippings = shippingMapper.selectByUid(uid);
+        PageInfo pageInfo = new PageInfo<>(shippings);
+        return ResponseVo.success(pageInfo);
     }
 }

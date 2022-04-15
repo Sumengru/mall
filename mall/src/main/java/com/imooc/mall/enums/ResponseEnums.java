@@ -26,6 +26,8 @@ public enum ResponseEnums {
 
     PRODUCT_STOCK_ERROR(14,"商品库存不足"),
 
+    DELETE_SHIPPING_ERROR(16,"删除收货地址失败"),
+
     PARAM_ERROR(3,"参数错误");
 
     ResponseEnums(Integer code, String desc) {
