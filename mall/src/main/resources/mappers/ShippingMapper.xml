@@ -29,7 +29,7 @@
     delete from mall_shipping
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.imooc.mall.pojo.Shipping">
+  <insert id="insert" parameterType="com.imooc.mall.pojo.Shipping" useGeneratedKeys="true" keyProperty="id">
     insert into mall_shipping (id, user_id, receiver_name, 
       receiver_phone, receiver_mobile, receiver_province, 
       receiver_city, receiver_district, receiver_address, 
@@ -174,4 +174,17 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <delete id="deleteByUidAndShippingId" parameterType="java.lang.Integer">
+    delete from mall_shipping
+    where id = #{id,jdbcType=INTEGER}
+    and user_id = #{uid,jdbcType=INTEGER}
+  </delete>
+
+  <select id="selectByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mall_shipping
+    where user_id = #{uid,jdbcType=INTEGER}
+  </select>
 </mapper>
