@@ -5,8 +5,10 @@ import com.imooc.mall.form.ShippingForm;
 import com.imooc.mall.pojo.Shipping;
 import com.imooc.mall.vo.ResponseVo;
 
+import java.util.Map;
+
 public interface IShippingService {
-    ResponseVo<Integer> add(Integer uid, ShippingForm form);
+    ResponseVo<Map<String,Integer>> add(Integer uid, ShippingForm form);
 
     ResponseVo delete(Integer uid, Integer shipingId);
 
